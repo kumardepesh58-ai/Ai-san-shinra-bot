@@ -38,7 +38,7 @@ def main():
         return "OK"
 
     # Set webhook URL (your Render service URL)
-    WEBHOOK_URL = f"https://ai-san-shinra-bot-2.onrender.com/{TOKEN}"
+    WEBHOOK_URL = f"https://ai-san-shinra-bot-2.onrender.com/{7566260613:AAFzyMo_3uumeEEqsPQEOtUjfUhFx_azTbM}"
 
     import telegram
     bot = telegram.Bot(TOKEN)
