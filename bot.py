@@ -1,37 +1,38 @@
 import logging
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Application, CommandHandler, MessageHandler, filters
 
 # Enable logging
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
-
 logger = logging.getLogger(__name__)
 
 # Start command
-def start(update, context):
-    update.message.reply_text("⚡ Welcome Warrior! AI-San Shinra AI is online. Type /mission to receive today’s mission.")
+async def start(update, context):
+    await update.message.reply_text(
+        "⚡ Welcome Warrior! AI-San Shinra AI is online. Type /mission to receive today’s mission."
+    )
 
 # Mission command
-def mission(update, context):
-    update.message.reply_text("🎯 Today’s Mission: 100 Pushups + 2 Hours Study + No Phone Distractions.\n\nStay disciplined!")
+async def mission(update, context):
+    await update.message.reply_text(
+        "🎯 Today’s Mission: 100 Pushups + 2 Hours Study + No Phone Distractions.\n\nStay disciplined!"
+    )
 
 # Echo fallback
-def echo(update, context):
-    update.message.reply_text("🔥 AI-San is listening… type /mission to begin!")
+async def echo(update, context):
+    await update.message.reply_text("🔥 AI-San is listening… type /mission to begin!")
 
 def main():
     # Replace with your real token
-    updater = Updater("7566260613:AAFzyMo_3uumeEEqsPQEOtUjfUhFx_azTbM", use_context=True)
-    dp = updater.dispatcher
+    application = Application.builder().token("7566260613:AAFzyMo_3uumeEEqsPQEOtUjfUhFx_azTbM").build()
 
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("mission", mission))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("mission", mission))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, echo))
 
-    updater.start_polling()
-    updater.idle()
+    application.run_polling()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
