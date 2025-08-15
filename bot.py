@@ -4,7 +4,7 @@ from flask import Flask, request
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler, ContextTypes
 
-# Enable logging
+# Logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
@@ -18,7 +18,7 @@ WEBHOOK_URL = f"https://ai-san-shinra-bot-2.onrender.com/{TOKEN}"
 # Flask app
 app_flask = Flask(__name__)
 
-# Telegram application
+# Telegram app
 application = Application.builder().token(TOKEN).build()
 
 # Start command
@@ -37,11 +37,11 @@ async def mission(update: Update, context: ContextTypes.DEFAULT_TYPE):
 application.add_handler(CommandHandler("start", start))
 application.add_handler(CommandHandler("mission", mission))
 
-# Webhook route
+# Correct webhook route
 @app_flask.route(f"/{TOKEN}", methods=["POST"])
 def webhook():
     update = Update.de_json(request.get_json(force=True), application.bot)
-    application.create_task(application.update_queue.put(update))
+    application.create_task(application.process_update(update))
     return "OK"
 
 if __name__ == "__main__":
