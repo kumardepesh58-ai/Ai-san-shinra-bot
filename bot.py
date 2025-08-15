@@ -4,7 +4,7 @@ from telegram.ext import Application, CommandHandler, ContextTypes
 
 TOKEN = "7566260613:AAFzyMo_3uumeEEqsPQEOtUjfUhFx_azTbM"
 PORT = int(os.environ.get("PORT", 10000))
-WEBHOOK_URL = f"https://ai-san-shinra-bot-2.onrender.com/{TOKEN}"
+WEBHOOK_URL = f"https://ai-san-shinra-bot-2.onrender.com/7566260613:AAFzyMo_3uumeEEqsPQEOtUjfUhFx_azTbM"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
